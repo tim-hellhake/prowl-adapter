@@ -1,0 +1,81 @@
+{
+  "name": "prowl-adapter",
+  "display_name": "Prowl",
+  "version": "0.1.0",
+  "description": "Pushes notifications to your device",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tim-hellhake/prowl-adapter.git"
+  },
+  "author": "Tim Hellhake",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tim-hellhake/prowl-adapter/issues"
+  },
+  "homepage": "https://github.com/tim-hellhake/prowl-adapter#readme",
+  "files": [
+    "LICENSE",
+    "SHA256SUMS",
+    "index.js",
+    "prowl-adapter.js"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "{nodeLoader} {path}",
+    "schema": {
+      "type": "object",
+      "required": [
+        "apiKey"
+      ],
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "title": "The api key"
+        },
+        "messages": {
+          "type": "array",
+          "title": "Predefined messages",
+          "items": {
+            "type": "object",
+            "title": "A predefined message",
+            "required": [
+              "name",
+              "application",
+              "event"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "The name of the action"
+              },
+              "application": {
+                "type": "string",
+                "title": "The name of the application"
+              },
+              "event": {
+                "type": "string",
+                "title": "The name of the event"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "node-prowl": "^0.1.7"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
+  }
+}

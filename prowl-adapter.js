@@ -40,12 +40,18 @@ class ProwlDevice extends Device {
         }
       }
     }, (action) => {
+      const {
+        event,
+        application,
+        description
+      } = action.input;
+
       const options = {
-        description: action.input.description
+        description
       };
 
       // eslint-disable-next-line max-len
-      prowl.push(action.input.event, action.input.application, options, (err, remaining) => {
+      prowl.push(event, application, options, (err, remaining) => {
         if (err) {
           console.error('Could not send push %s', err);
         }

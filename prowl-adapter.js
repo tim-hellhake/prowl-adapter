@@ -33,12 +33,19 @@ class ProwlDevice extends Device {
           },
           event: {
             type: 'string'
+          },
+          description: {
+            type: 'string'
           }
         }
       }
     }, (action) => {
+      const options = {
+        description: action.input.description
+      };
+
       // eslint-disable-next-line max-len
-      prowl.push(action.input.event, action.input.application, (err, remaining) => {
+      prowl.push(action.input.event, action.input.application, options, (err, remaining) => {
         if (err) {
           console.error('Could not send push %s', err);
         }
@@ -52,7 +59,8 @@ class ProwlDevice extends Device {
         const {
           name,
           application,
-          event
+          event,
+          description
         } = message;
 
         console.log(`Creating action for ${name}`);
@@ -61,7 +69,11 @@ class ProwlDevice extends Device {
           title: name,
           description: 'Push a notification'
         }, () => {
-          prowl.push(event, application, (err, remaining) => {
+          const options = {
+            description
+          };
+
+          prowl.push(event, application, options, (err, remaining) => {
             if (err) {
               console.error('Could not send push %s', err);
             }

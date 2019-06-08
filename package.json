@@ -1,7 +1,7 @@
 {
   "name": "prowl-adapter",
   "display_name": "Prowl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Pushes notifications to your device",
   "main": "index.js",
   "scripts": {
@@ -50,7 +50,8 @@
             "required": [
               "name",
               "application",
-              "event"
+              "event",
+              "description"
             ],
             "properties": {
               "name": {
@@ -64,6 +65,10 @@
               "event": {
                 "type": "string",
                 "title": "The name of the event"
+              },
+              "description": {
+                "type": "string",
+                "title": "The description of the message"
               }
             }
           }

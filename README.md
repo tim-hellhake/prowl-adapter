@@ -14,7 +14,7 @@ Pushes notifications to your device.
 3. Add api key to config
 
 ## Usage
-The addon registers a Prowl device with a `push(application, event)` action.
+The addon registers a Prowl device with a `push(application, event, description)` action.
 
 Currently, a rule can only trigger parameterless actions.
 

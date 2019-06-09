@@ -17,8 +17,8 @@ class ProwlDevice extends Device {
   constructor(adapter, manifest) {
     super(adapter, 'Prowl');
     this['@context'] = 'https://iot.mozilla.org/schemas/';
-    this.name = 'Prowl';
-    this.description = 'Pushes notifications to your device';
+    this.name = manifest.display_name;
+    this.description = manifest.description;
     this.callbacks = {};
     const prowl = new Prowl(manifest.moziot.config.apiKey);
 

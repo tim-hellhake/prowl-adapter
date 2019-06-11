@@ -15,7 +15,7 @@ const {
 
 class ProwlDevice extends Device {
   constructor(adapter, manifest) {
-    super(adapter, 'Prowl');
+    super(adapter, manifest.display_name);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
     this.name = manifest.display_name;
     this.description = manifest.description;

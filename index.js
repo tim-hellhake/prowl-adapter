@@ -8,5 +8,15 @@
 
 const ProwlAdapter = require('./prowl-adapter');
 
-module.exports =
-    (addonManager, manifest) => new ProwlAdapter(addonManager, manifest);
+module.exports = (addonManager, manifest) => {
+  new ProwlAdapter(addonManager, manifest);
+
+  try {
+    const ProwlNotifier = require('./prowl-notifier');
+    new ProwlNotifier(addonManager, manifest);
+  } catch (e) {
+    if (!(e instanceof TypeError)) {
+      console.error(e);
+    }
+  }
+};

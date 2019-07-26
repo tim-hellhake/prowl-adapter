@@ -22,13 +22,15 @@
     "LICENSE",
     "SHA256SUMS",
     "index.js",
-    "prowl-adapter.js"
+    "prowl-adapter.js",
+    "prowl-notifier.js"
   ],
   "moziot": {
     "api": {
       "min": 2,
       "max": 2
     },
+    "type": "notifier",
     "plugin": true,
     "exec": "{nodeLoader} {path}",
     "schema": {

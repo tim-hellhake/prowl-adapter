@@ -3,7 +3,7 @@
   "id": "prowl-adapter",
   "name": "Prowl",
   "short_name": "Prowl",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Pushes notifications to your device",
   "homepage_url": "https://github.com/tim-hellhake/prowl-adapter#readme",
   "license": "MPL-2.0",

@@ -1,7 +1,7 @@
 {
   "name": "prowl-adapter",
   "display_name": "Prowl",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Pushes notifications to your device",
   "main": "lib/index.js",
   "scripts": {

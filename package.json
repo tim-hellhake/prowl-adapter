@@ -3,10 +3,10 @@
   "display_name": "Prowl",
   "version": "0.2.3",
   "description": "Pushes notifications to your device",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,9 @@
     "LICENSE",
     "SHA256SUMS",
     "manifest.json",
-    "index.js",
-    "prowl-adapter.js",
-    "prowl-notifier.js"
+    "lib/index.js",
+    "lib/prowl-adapter.js",
+    "lib/prowl-notifier.js"
   ],
   "moziot": {
     "api": {
@@ -83,7 +83,7 @@
     "node-prowl": "^0.1.7"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0"
+    "@types/node": "^13.9.0",
+    "typescript": "^3.8.3"
   }
 }

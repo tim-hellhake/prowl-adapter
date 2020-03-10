@@ -1,14 +1,16 @@
 #!/bin/bash
 
+npm ci
+npm run build
 rm -rf node_modules
-npm install --production
-rm -rf node_modules/.bin
+npm ci --production
 
-shasum --algorithm 256 package.json manifest.json *.js LICENSE README.md > SHA256SUMS
-find node_modules -type f -exec shasum --algorithm 256 {} \; >> SHA256SUMS
+shasum --algorithm 256 package.json manifest.json lib/*.js LICENSE README.md > SHA256SUMS
+find node_modules \( -type f -o -type l \) -exec shasum --algorithm 256 {} \; >> SHA256SUMS
 
 TARFILE=`npm pack`
 tar xzf ${TARFILE}
+rm ${TARFILE}
 cp -r node_modules ./package
 tar czf ${TARFILE} package
 

@@ -6,23 +6,24 @@
 
 'use strict';
 
-const Prowl = require('node-prowl');
-
-const {
-  Constants,
+import {
   Notifier,
   Outlet,
-} = require('gateway-addon');
+  Constants
+} from 'gateway-addon';
+
+import Prowl from 'node-prowl';
 
 class ProwlOutlet extends Outlet {
-  constructor(notifier, id, config) {
+  private prowl: Prowl;
+
+  constructor(notifier: Notifier, id: string, config: any) {
     super(notifier, id);
     this.name = 'Pushover';
-    this.config = config;
     this.prowl = new Prowl(config.apiKey);
   }
 
-  notify(title, message, level) {
+  notify(title: string, message: string, level: Constants.NotificationLevel) {
     let priority = 0;
 
     switch (level) {
@@ -54,8 +55,8 @@ class ProwlOutlet extends Outlet {
   }
 }
 
-class ProwlNotifier extends Notifier {
-  constructor(addonManager, manifest) {
+export class ProwlNotifier extends Notifier {
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, ProwlNotifier.name, manifest.name);
 
     addonManager.addNotifier(this);
@@ -67,5 +68,3 @@ class ProwlNotifier extends Notifier {
     }
   }
 }
-
-module.exports = ProwlNotifier;

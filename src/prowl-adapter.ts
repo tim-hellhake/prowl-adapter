@@ -6,20 +6,20 @@
 
 'use strict';
 
-const Prowl = require('node-prowl');
-
-const {
+import {
   Adapter,
-  Device,
-} = require('gateway-addon');
+  Device
+} from 'gateway-addon';
+
+import Prowl from 'node-prowl';
 
 class ProwlDevice extends Device {
-  constructor(adapter, manifest) {
+  private callbacks: { [key: string]: (action: any) => void } = {};
+  constructor(adapter: Adapter, manifest: any) {
     super(adapter, manifest.display_name);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
     this.name = manifest.display_name;
     this.description = manifest.description;
-    this.callbacks = {};
     const prowl = new Prowl(manifest.moziot.config.apiKey);
 
     this.addCallbackAction({
@@ -50,7 +50,6 @@ class ProwlDevice extends Device {
         description
       };
 
-      // eslint-disable-next-line max-len
       prowl.push(event, application, options, (err, remaining) => {
         if (err) {
           console.error('Could not send push %s', err);
@@ -91,12 +90,12 @@ class ProwlDevice extends Device {
     }
   }
 
-  addCallbackAction(description, callback) {
+  addCallbackAction(description: any, callback: (action: any) => void) {
     this.addAction(description.title, description);
     this.callbacks[description.title] = callback;
   }
 
-  async performAction(action) {
+  async performAction(action: any) {
     action.start();
 
     const callback = this.callbacks[action.name];
@@ -111,13 +110,11 @@ class ProwlDevice extends Device {
   }
 }
 
-class ProwlAdapter extends Adapter {
-  constructor(addonManager, manifest) {
+export class ProwlAdapter extends Adapter {
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, ProwlAdapter.name, manifest.name);
     addonManager.addAdapter(this);
     const prowl = new ProwlDevice(this, manifest);
     this.handleDeviceAdded(prowl);
   }
 }
-
-module.exports = ProwlAdapter;
